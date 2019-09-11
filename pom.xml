@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.3.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository sdfhklsdhjfkljsdlfjalsdjf-->
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.imooc</groupId>
     <artifactId>sell2</artifactId>
