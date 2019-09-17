@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 /**
  * 订单详情
- * @author Shuhao Bai on 9/12/19
+ * @author Shuhao Bai on 9/12/ 19
  */
 @Entity
 @Data
