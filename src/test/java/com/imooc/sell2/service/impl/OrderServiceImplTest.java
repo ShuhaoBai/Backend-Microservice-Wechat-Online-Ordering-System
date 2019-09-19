@@ -2,6 +2,7 @@ package com.imooc.sell2.service.impl;
 
 import com.imooc.sell2.dataobject.OrderDetail;
 import com.imooc.sell2.dto.OrderDTO;
+import com.imooc.sell2.enums.OrderStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -61,7 +62,6 @@ public class OrderServiceImplTest {
 
     @Test
     public void findOne() throws Exception {
-
         OrderDTO result = orderService.findOne(ORDER_ID);
         log.info("【查询单个订单】result={}", result);
         Assert.assertEquals(ORDER_ID, result.getOrderId());
@@ -76,11 +76,16 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() throws Exception{
-
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.cancel(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(), result.getOrderStatus());
     }
 
     @Test
     public void finish() throws Exception{
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.finish(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(), result.getOrderStatus());
     }
 
     @Test
