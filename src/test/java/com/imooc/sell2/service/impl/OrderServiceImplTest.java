@@ -3,6 +3,7 @@ package com.imooc.sell2.service.impl;
 import com.imooc.sell2.dataobject.OrderDetail;
 import com.imooc.sell2.dto.OrderDTO;
 import com.imooc.sell2.enums.OrderStatusEnum;
+import com.imooc.sell2.enums.PayStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -90,5 +91,8 @@ public class OrderServiceImplTest {
 
     @Test
     public void paid() throws Exception{
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), result.getPayStatus());
     }
 }
