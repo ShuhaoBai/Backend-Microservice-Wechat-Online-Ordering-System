@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import javax.xml.transform.Result;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -135,7 +136,8 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
 
-        //然后就可以修改订单状态
+        //然后就可以
+        //修改订单状态
         orderDTO.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
         BeanUtils.copyProperties(orderDTO, orderMaster);//把orderDTO的属性，复制给orderMaster，因为下面代码
         //取消一个订单，要先判断一下这个订单的状态，只有在指定的某些状态下才能被取消
@@ -145,7 +147,8 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
 
-        //然后返回库存
+        //然后
+        //返回库存
         if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
             log.error("【取消订单】订单中无商品详情，orderMaster={}",orderDTO);
             throw new SellException(ResultEnum.ORDER_DETAIL_EMPTY);
@@ -175,9 +178,9 @@ public class OrderServiceImpl implements OrderService {
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
         OrderMaster updateResult = orderMasterRepository.save(orderMaster);
-        if(!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
-            log.error("【完结订单】更新失败, orderId={}, orderStatus={}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
-            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+        if (updateResult == null) {
+            log.error("【完结订单】更新失败，orderMaster={}", orderMaster);
+            throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
         return orderDTO;
     }
