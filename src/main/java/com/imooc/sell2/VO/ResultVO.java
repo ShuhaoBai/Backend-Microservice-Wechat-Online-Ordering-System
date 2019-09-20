@@ -1,5 +1,6 @@
 package com.imooc.sell2.VO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
