@@ -46,5 +46,6 @@ public class BuyerServiceImpl implements BuyerService {
             log.error("【查询订单】订单的openid不一致，openid={}, orderDTO={}", openid, orderDTO);
             throw new SellException(ResultEnum.ORDER_OWNER_ERROR);
         }
+        return orderDTO;
     }
 }
