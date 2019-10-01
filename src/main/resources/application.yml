@@ -15,7 +15,8 @@ server:
 wechat:
   mpAppId: wx8b298abbb1687404
   mpAppSecret: 157436a4cec18c106c5356bb59a11d59
-  mchId:
-  mchKey:
+  mchId: 1409146202
+  mchKey: c976503d34ca432c601361f969fd8d85
   keyPath:
+  notifyUrl: http://baishuhao.natapp1.cc/sell2/pay/notify
 
