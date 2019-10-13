@@ -95,4 +95,16 @@ public class OrderServiceImplTest {
         OrderDTO result = orderService.paid(orderDTO);
         Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), result.getPayStatus());
     }
+
+    @Test
+    public void list() {
+
+        PageRequest request = new PageRequest(0, 2);
+        Page<OrderDTO> orderDTOPage = orderService.findList(request);
+        //Assert.assertNotEquals(0, orderDTOPage.getTotalElements());
+
+        //下面这个测试的Assert适用于上面所有的Assert，都可以换成下面这行代码。 当测试不通过的时候，下面这行代码会提示哪里出错了
+        Assert.assertTrue("查询所有的订单列表", orderDTOPage.getTotalElements() > 0);
+    }
+
 }
