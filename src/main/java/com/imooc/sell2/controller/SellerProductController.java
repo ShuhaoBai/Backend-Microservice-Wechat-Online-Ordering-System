@@ -7,6 +7,7 @@ import com.imooc.sell2.exception.SellException;
 import com.imooc.sell2.form.ProductForm;
 import com.imooc.sell2.service.CategoryService;
 import com.imooc.sell2.service.ProductService;
+import com.imooc.sell2.utils.KeyUtil;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,9 +128,16 @@ public class SellerProductController {
             return new ModelAndView("common/error", map);
         }
 
-        //这个属性拷贝要格外小心，我们要先在数据库中把这个productInfo的form查出来，然后再把前端传过来的值赋给它，然后再存入数据库，这样才能覆盖（保存到）数据库
+        ProductInfo productInfo = new ProductInfo();
         try {
-            ProductInfo productInfo = productService.findOne(form.getProductId());
+            //如果productId为空，说明是新增。
+            if (!StringUtils.isEmpty(form.getProductId())){
+                productInfo = productService.findOne(form.getProductId());
+            } else {
+                form.setProductId(KeyUtil.genUniqueKey());
+            }
+            //这个属性拷贝要格外小心，我们要先在数据库中把这个productInfo的form查出来，然后再把前端传过来的值赋给它，然后再存入数据库，这样才能覆盖（保存到）数据库
+
             //ProductInfo productInfo = new ProductInfo();
             BeanUtils.copyProperties(form, productInfo);
             productService.save(productInfo);
