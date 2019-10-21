@@ -8,7 +8,9 @@ spring:
     show-sql: true
   jackson:
     default-property-inclusion: non_null
-
+  redis:
+    host: 192.168.1.164
+    port: 6379
 server:
   context-path: /sell2
 
@@ -20,3 +22,7 @@ wechat:
   keyPath:
   notifyUrl: http://baishuhao.natapp1.cc/sell2/pay/notify
 
+projectUrl:
+  wechatMpAuthorize: http://baishuihao.natapp4.cn
+  wechatOpenAuthorize: http://baishuihao.natapp4.cn
+  sell: http://baishuihao.natapp4.cn
