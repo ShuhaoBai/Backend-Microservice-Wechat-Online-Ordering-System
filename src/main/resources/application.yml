@@ -21,6 +21,9 @@ wechat:
   mchKey: c976503d34ca432c601361f969fd8d85
   keyPath:
   notifyUrl: http://baishuhao.natapp1.cc/sell2/pay/notify
+  templateId:
+    orderStatus: e-Cqq6
+
 
 projectUrl:
   wechatMpAuthorize: http://baishuihao.natapp4.cn

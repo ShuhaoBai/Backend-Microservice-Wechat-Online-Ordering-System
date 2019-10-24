@@ -76,5 +76,63 @@
         </div>
     </div>
 
+<#--pop-up window-->
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Reminder
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    You got a new order.
+                </div>
+                <div class="modal-footer">
+                    <button onclick="javascript:document.getElementById('notice').pause()" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button onclick="location.reload()" type="button" class="btn btn-primary">Check New Order</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+<#--    play a song-->
+    <audio id="notice" loop="loop">
+        <source src="/sell2/mp3/song.mp3" type="audio/mpeg" />
+    </audio>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+        var webscoket = null;
+        if('WebSocket' in window){
+            webscoket = new WebSocket('ws://baishuhao.natapp4.cc/sell2/webSocket');
+        } else {
+            alert('current browser does not support websocket!');
+        }
+
+        webscoket.onopen = function(event){
+            console.log('Connection is made')
+        }
+        webscoket.onclose = function(event){
+            console.log('connection is closed')
+        }
+        webscoket.onmessage = function(event){
+            console.log('Received a message:' + event.data)
+            //you can do play a song, or pop a message in front-end
+            ${'#myModal'}.modal('show');
+            document.getElementById('notice').play();
+
+        }
+        webscoket.onerror = function() {
+            alert('error occurred')
+        }
+        window.onbeforeunload = function () {
+            webscoket.close();
+        }
+    </script>
     </body>
 </html>
