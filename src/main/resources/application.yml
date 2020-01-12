@@ -29,3 +29,12 @@ projectUrl:
   wechatMpAuthorize: http://baishuihao.natapp4.cn
   wechatOpenAuthorize: http://baishuihao.natapp4.cn
   sell: http://baishuihao.natapp4.cn
+logging:
+  level:
+    com:
+      imooc:
+        sell2:
+          dataobject:
+            mapper: trace
+mybaits:
+  mapper-locations: classpath:mapper/*.xml

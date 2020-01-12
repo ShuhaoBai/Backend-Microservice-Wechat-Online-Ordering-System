@@ -1,6 +1,7 @@
 package com.imooc.sell2.service.impl;
 
 import com.imooc.sell2.dataobject.ProductCategory;
+import com.imooc.sell2.dataobject.mapper.ProductCategoryMapper;
 import com.imooc.sell2.repository.ProductCategoryRepository;
 import com.imooc.sell2.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private ProductCategoryRepository repository;
+
+
+
     @Override
     public ProductCategory findOne(Integer categoryId) {
         return repository.findOne(categoryId);
