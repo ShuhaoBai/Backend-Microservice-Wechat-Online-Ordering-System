@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Shuhao Bai on 10/21/19
- * 卖家用户相关的操作
+ * Seller side operations/manipulations
  */
 
 @Controller
@@ -36,7 +36,7 @@ public class SellerUserController {
     @Autowired
     private SellerService sellerService;
 
-    //使用redis
+    //Redis
     @Autowired
     private StringRedisTemplate redisTemplate;
 
@@ -44,11 +44,10 @@ public class SellerUserController {
     private ProjectUrlConfig projectUrlConfig;
 
     @GetMapping("/login")
-    //用modelandview直接跳到错误界面
     public ModelAndView login(@RequestParam("openid") String openid,
                               HttpServletResponse response,
                               Map<String, Object> map) {
-        //1. openid去和数据库里的数据匹配
+        //1. match openid in the database
         SellerInfo sellerInfo = sellerService.findSellerInfoByOpenid(openid);
         if(sellerInfo == null){
             map.put("msg", ResultEnum.LOGIN_FAIL.getMessage());
@@ -56,32 +55,31 @@ public class SellerUserController {
             return new ModelAndView("common/error");
         }
 
-        //2. 设置token至redis
+        //2. Set up token in redis
         String token = UUID.randomUUID().toString();
         Integer expire = RedisConstant.EXPIRE;
         redisTemplate.opsForValue().set(String.format(RedisConstant.TOKEN_PREFIX, token), openid, expire, TimeUnit.SECONDS);
 
-        //3. 设置token至cookie
-        //往response里写cookie
+        //put cookie into response
         CookieUtil.set(response, CookieConstant.TOKEN, token, expire);
 
         return new ModelAndView("redirect:" + projectUrlConfig.getSell() + "/sell2/seller/order/list");
     }
     @GetMapping("/logout")
-    //登出就是要把cookie和redis给清除掉
+    //Erase cookie&token when log out
     public ModelAndView logout(HttpServletRequest request,
                        HttpServletResponse response,
                        Map<String, Object> map) {
-        //1. 从cookie里查询
+        //1. Search in cookies
         Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
         if(cookie != null){
-            //2. 清除redis
+            //2. Erase Redis
             redisTemplate.opsForValue().getOperations().delete(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));
-            //3. 清除cookie
+            //3. Erase Cookie
             CookieUtil.set(response, CookieConstant.TOKEN, null, 0);
         }
         map.put("msg", ResultEnum.LOGOUT_SUCCESS.getMessage());
-        //登出成功之后，跳转到列表页
+        //Redirect
         map.put("url", "/sell2/seller/order/list");
         return new ModelAndView("common/success", map);
     }

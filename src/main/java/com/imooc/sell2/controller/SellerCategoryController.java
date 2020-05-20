@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 卖家类目controller
+ * Seller Item Category Controller
  * @author Shuhao Bai on 10/13/19
  */
 
@@ -38,7 +38,7 @@ public class SellerCategoryController {
     }
 
     /**
-     * 展示
+     * Display
      * @param categoryId
      * @param map
      * @return
@@ -54,7 +54,7 @@ public class SellerCategoryController {
     }
 
     /**
-     * 保存/更新
+     * Save/Update
      * @param form
      * @param bindingResult
      * @param map

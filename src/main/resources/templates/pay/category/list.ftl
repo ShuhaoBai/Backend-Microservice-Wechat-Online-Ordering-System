@@ -13,12 +13,12 @@
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th>类目id</th>
-                                <th>名字</th>
-                                <th>type</th>
-                                <th>创建时间</th>
-                                <th>修改时间</th>
-                                <th>操作</th>
+                                <th>Category ID</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Creation Time</th>
+                                <th>Modified Time</th>
+                                <th>Operation</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -29,7 +29,7 @@
                                     <td>${category.categoryType}</td>
                                     <td>${category.createTime}</td>
                                     <td>${category.updateTime}</td>
-                                    <td><a href="sell2/seller/category/index?categoryId=${category.categoryId}">修改</a></td>
+                                    <td><a href="sell2/seller/category/index?categoryId=${category.categoryId}">Modify</a></td>
                                 </tr>
                             </#list>
                             </tbody>

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
- * 微信开放平台的configuration,为了获取QR扫码登录的
+ * Wechat Mp Configuration for QR Scan Login
  *
  * @author Shuhao Bai on 10/21/19
  */

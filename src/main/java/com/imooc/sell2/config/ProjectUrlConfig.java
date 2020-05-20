@@ -11,18 +11,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "projectUrl")
 @Component
 public class ProjectUrlConfig {
-    /**
-     * 微信公众账号授权Url
-     */
     public String wechatMpAuthorize;
-
-    /**
-     * 微信开放平台授权Url
-     */
     public String wechatOpenAuthorize;
-
-    /**
-     * 点餐系统
-     */
     public String sell;
 }

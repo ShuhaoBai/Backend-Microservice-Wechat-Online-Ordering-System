@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 买家服务实现
+ * Buyer service implementation
  *
  * @author Shuhao Bai on 9/19/19
  */
@@ -30,7 +30,7 @@ public class BuyerServiceImpl implements BuyerService {
     public OrderDTO cancelOrder(String openid, String orderId) {
         OrderDTO orderDTO = checkOrderOwner(openid, orderId);
         if(orderDTO == null){
-            log.error("【取消订单】查不到该订单，orderId = {}", orderId);
+            log.error("【Order Cancel】Order not found，orderId = {}", orderId);
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
         return orderService.cancel(orderDTO);
@@ -41,9 +41,9 @@ public class BuyerServiceImpl implements BuyerService {
         if(orderDTO == null){
             return null;
         }
-        //判断是否是自己的订单
+
         if(!orderDTO.getBuyerOpenid().equalsIgnoreCase(openid)){
-            log.error("【查询订单】订单的openid不一致，openid={}, orderDTO={}", openid, orderDTO);
+            log.error("【Search Order】orderid is not matching openid={}, orderDTO={}", openid, orderDTO);
             throw new SellException(ResultEnum.ORDER_OWNER_ERROR);
         }
         return orderDTO;

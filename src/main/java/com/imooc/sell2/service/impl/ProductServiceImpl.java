@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional //加个事务，要么全部成功，要么全部不成功
+    @Transactional
     public void decreaseStock(List<CartDTO> cartDTOList) {
         for(CartDTO cartDTO : cartDTOList){
             ProductInfo productInfo = repository.findOne(cartDTO.getProductId());

@@ -35,20 +35,20 @@ public class BuyerOrderController {
     private OrderService orderService;
     @Autowired
     private BuyerService buyerService;
-    //创建订单
+    //Create order list
     @PostMapping("/create")
     public ResultVO<Map<String, String>> create(@Valid OrderForm orderForm,
                                                 BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
-            log.error("【创建订单】参数不正确，orderForm={}", orderForm);
+            log.error("【Create Order List】Parameter Error，orderForm={}", orderForm);
             throw new SellException(ResultEnum.PARAM_ERROR.getCode(),
                     bindingResult.getFieldError().getDefaultMessage());
         }
-        //参数正常的话，就继续往下走了
+
         OrderDTO orderDTO = OrderForm2OrderDTOConverter.convert(orderForm);
-        //判断一下购物车是否为空
+        //Check if shopping cart empty?
         if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
-            log.error("【创建订单】购物车不能为空");
+            log.error("【Create Order List】Cart can't be empty");
             throw new SellException(ResultEnum.CART_EMPTY);
         }
 
@@ -60,26 +60,26 @@ public class BuyerOrderController {
         return ResultVOUtil.success(map);
     }
 
-    //订单列表
+    //Order List
     @GetMapping("/list")
     public ResultVO<List<OrderDTO>> list(@RequestParam("openid") String openid,
                                          @RequestParam(value = "page", defaultValue = "0") Integer page,
                                          @RequestParam(value = "size", defaultValue = "10") Integer size){
         if(StringUtils.isEmpty(openid)){
-            log.error("【查询订单列表】openid为空");
+            log.error("【Order List Searching】openid is null");
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
         PageRequest request = new PageRequest(page, size);
         Page<OrderDTO> orderDTOPage = orderService.findList(openid, request);
 
-        //转存Date -> Long
+        //Convert date to long
         return ResultVOUtil.success(orderDTOPage.getContent());
 //        ResultVO resultVO = new ResultVO();
 //        resultVO.setCode(0);
 //        return resultVO;
     }
 
-    //订单详情
+    //Order Detail
     @GetMapping("/detail")
     public ResultVO<OrderDTO> detail (@RequestParam("openid") String openid,
                                      @RequestParam("orderId") String orderId){
@@ -89,11 +89,11 @@ public class BuyerOrderController {
     }
 
 
-    //取消订单
+    //Order Cancel
     @PostMapping("/cancel")
     public ResultVO cancel(@RequestParam("openid") String openid,
                            @RequestParam("orderId") String orderId){
-        //TODO 不安全的做法，任何人一个传进来一个openid就都可查了，要改进
+
         buyerService.cancelOrder(openid, orderId);
         return ResultVOUtil.success();
     }

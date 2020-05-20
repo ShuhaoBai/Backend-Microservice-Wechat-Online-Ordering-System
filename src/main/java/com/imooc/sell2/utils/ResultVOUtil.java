@@ -10,7 +10,7 @@ public class ResultVOUtil {
         ResultVO resultVO = new ResultVO();
         resultVO.setData(object);
         resultVO.setCode(0);
-        resultVO.setMsg("成功");
+        resultVO.setMsg("Success");
         return resultVO;
     }
 

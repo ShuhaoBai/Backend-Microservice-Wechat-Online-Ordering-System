@@ -1,7 +1,7 @@
 package com.imooc.sell2.constant;
 
 /**
- * redis常量
+ * Redis Constant
  * @author Shuhao Bai on 10/21/19
  */
 public interface RedisConstant {

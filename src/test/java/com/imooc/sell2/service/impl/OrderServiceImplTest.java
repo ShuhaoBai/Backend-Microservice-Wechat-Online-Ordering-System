@@ -37,12 +37,12 @@ public class OrderServiceImplTest {
     @Test
     public void create() {
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setBuyerName("白书豪");
+        orderDTO.setBuyerName("BSH");
         orderDTO.setBuyerAddress("Stevens Institute of Technology");
         orderDTO.setBuyerOpenid(BUYER_OPENID);
         orderDTO.setBuyerPhone("123456789012");
 
-        //购物车
+        //Cart
         List<OrderDetail> orderDetailList = new ArrayList<>();
         OrderDetail o1 = new OrderDetail();
         o1.setProductId("123458");
@@ -57,14 +57,14 @@ public class OrderServiceImplTest {
 
         orderDTO.setOrderDetailList(orderDetailList);
         OrderDTO result = orderService.create(orderDTO);
-        log.info("【创建订单】result ={}", result);
+        log.info("【Create Order】result ={}", result);
         Assert.assertNotNull(result);
     }
 
     @Test
     public void findOne() throws Exception {
         OrderDTO result = orderService.findOne(ORDER_ID);
-        log.info("【查询单个订单】result={}", result);
+        log.info("【Search Single Order】result={}", result);
         Assert.assertEquals(ORDER_ID, result.getOrderId());
     }
 
@@ -101,9 +101,6 @@ public class OrderServiceImplTest {
 
         PageRequest request = new PageRequest(0, 2);
         Page<OrderDTO> orderDTOPage = orderService.findList(request);
-        //Assert.assertNotEquals(0, orderDTOPage.getTotalElements());
-
-        //下面这个测试的Assert适用于上面所有的Assert，都可以换成下面这行代码。 当测试不通过的时候，下面这行代码会提示哪里出错了
         Assert.assertTrue("查询所有的订单列表", orderDTOPage.getTotalElements() > 0);
     }
 

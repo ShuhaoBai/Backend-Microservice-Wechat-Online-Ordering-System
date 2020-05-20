@@ -12,8 +12,8 @@
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
-                            <th>订单id</th>
-                            <th>订单总金额</th>
+                            <th>OrderID</th>
+                            <th>Order Amount Sum</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -22,16 +22,16 @@
                         </tbody>
                     </table>
                 </div>
-                <#--        订单详情表数据-->
+
                 <div class="col-md-12 column">
                     <table class="table table-hover table-bordered">
                         <thead>
                         <tr>
-                            <th>商品id</th>
-                            <th>商品名称</th>
-                            <th>价格</th>
-                            <th>数量</th>
-                            <th>总额</th>
+                            <th>ProductID</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -48,11 +48,10 @@
                 </div>
             </div>
 
-            <#--    操作-->
             <div class="col-md-12 column">
-                <#if orderDTO.getOrderStatusEnum().message == "新订单">
-                    <a href="/sell2/seller/order/finish?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-primary">完结订单</a>
-                    <a href="/sell2/seller/order/cancel?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-danger">取消订单</a>
+                <#if orderDTO.getOrderStatusEnum().message == "New Order">
+                    <a href="/sell2/seller/order/finish?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-primary">Order Complete</a>
+                    <a href="/sell2/seller/order/cancel?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-danger">Order Cancel</a>
                 </#if>
 
             </div>

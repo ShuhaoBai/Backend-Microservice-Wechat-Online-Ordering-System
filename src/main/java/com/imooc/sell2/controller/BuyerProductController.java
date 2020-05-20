@@ -20,11 +20,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 买家商品
+ * Buyer Item
  * @author Shuhao Bai on 9/11/19
  */
 
-@RestController //返回的是Json格式
+@RestController //Return format is Json
 @RequestMapping("/buyer/product")
 public class BuyerProductController {
 
@@ -35,23 +35,13 @@ public class BuyerProductController {
 
     @GetMapping("/list")
     public ResultVO list(){
-        //从数据库里查询出来，并且展示 ：
-        //第一步和第二步都是对数据库的查询
-        //1. 查询所有的上架商品 - 上面需要@Autowire ProductService
-        List<ProductInfo> productInfoList = productService.findUpAll();
 
-        //2. 查询类目（一次性查询） - 上面需要@Autowire CategoryService
-        //List<Integer> categoryTypeList = new ArrayList<>();
-        //传统方法
-//        for(ProductInfo productInfo : productInfoList){
-//            categoryTypeList.add(productInfo.getCategoryType());
-//        }
-        //精简方法Java8
+        List<ProductInfo> productInfoList = productService.findUpAll();
         List<Integer> categoryTypeList = productInfoList.stream().
                 map(e -> e.getCategoryType()).
                 collect(Collectors.toList());
         List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
-        //3. 数据拼装
+
         List<ProductVO> productVOList = new ArrayList<>();
         for(ProductCategory productCategory : productCategoryList) {
             ProductVO productVO = new ProductVO();
@@ -69,17 +59,6 @@ public class BuyerProductController {
             productVO.setProductInfoVOList(productInfoVOList);
             productVOList.add(productVO);
         }
-
-
-
-
-//        ResultVO resultVO = new ResultVO();
-//
-//        resultVO.setData(productVOList);
-//        resultVO.setCode(0);
-//        resultVO.setMsg("成功");
-
-
         return ResultVOUtil.success(productVOList)  ;
     }
 }

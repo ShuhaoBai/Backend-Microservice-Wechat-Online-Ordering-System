@@ -1,7 +1,7 @@
 package com.imooc.sell2.exception;
 
 /**
- * Seller用户校验专用
+ * Seller Authorization
  *
  * @author Shuhao Bai on 10/24/19
  */

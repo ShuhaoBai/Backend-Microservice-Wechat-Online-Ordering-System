@@ -20,7 +20,7 @@ public class RedisLock {
     /**
      * lock
      * @param key
-     * @param value current time + time overdue   当前时间+超时时间
+     * @param value current time + time overdue   current time + time overdue
      * @return
      */
     public boolean lock(String key, String value){
@@ -28,9 +28,8 @@ public class RedisLock {
             return true;
         }
         String currentValue = redisTemplate.opsForValue().get(key);
-        //如果锁过期
+        //Lock Expired
         if(!StringUtils.isEmpty(currentValue) && Long.parseLong(currentValue) < System.currentTimeMillis()){
-            //获取上一个锁的时间
             String oldValue = redisTemplate.opsForValue().getAndSet(key, value);
             if(!StringUtils.isEmpty(oldValue) && oldValue.equals(currentValue)){
                 return true;
@@ -40,7 +39,7 @@ public class RedisLock {
     }
 
     /**
-     * 解锁unlock
+     * unlock
      * @param key
      * @param value
      */

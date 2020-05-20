@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * 对异常（exception）的捕获和处理
+ * Exception handler
  *
  * @author Shuhao Bai on 10/24/19
  */
@@ -22,8 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class SellerExceptionHandler {
     @Autowired
     private ProjectUrlConfig projectUrlConfig;
-    //拦截登录异常
-    //@org.springframework.web.bind.annotation.ExceptionHandler
+
     @ExceptionHandler(value = SellerAuthorizeException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ModelAndView handlerAuthorizeException(){

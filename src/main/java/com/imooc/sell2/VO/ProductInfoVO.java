@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * 商品详情
+ * Product Details
  * @author Shuhao Bai on 9/11/19
  */
 @Data

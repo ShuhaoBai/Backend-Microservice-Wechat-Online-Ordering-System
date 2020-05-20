@@ -55,11 +55,6 @@ public class ProductCategoryMapperTest {
         Assert.assertNotEquals(0, result.size());
     }
 
-//    @Test
-//    public void updateByCategoryType(){
-//        mapper.updateByCategoryType("mostDisliked", 102);
-//        Assert.assertEquals(1, result);
-//    }
 
     @Test
     public void selectByCategoryType(){

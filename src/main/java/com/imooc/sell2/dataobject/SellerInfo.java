@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * 卖家信息实体类
+ * Seller Info Entity
  *
  * @author Shuhao Bai on 10/21/19
  */
@@ -15,10 +15,7 @@ import javax.persistence.Id;
 public class SellerInfo {
     @Id
     private String sellerId;
-
     private String username;
-
     private String password;
-
     private String openid;
 }

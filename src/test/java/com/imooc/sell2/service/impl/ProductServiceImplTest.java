@@ -43,7 +43,6 @@ public class ProductServiceImplTest {
     public void findAll() throws Exception{
         PageRequest request = new PageRequest(0, 2);
         Page<ProductInfo> productInfoPage = productService.findAll(request);
-        //System.out.println(productInfoPage.getTotalElements());
         Assert.assertNotEquals(0, productInfoPage.getTotalElements());
     }
 
@@ -51,10 +50,10 @@ public class ProductServiceImplTest {
     public void save() throws Exception{
         ProductInfo productInfo = new ProductInfo();
         productInfo.setProductId("123457");
-        productInfo.setProductName("皮皮虾");
+        productInfo.setProductName("Beef");
         productInfo.setProductPrice(new BigDecimal(3.2));
         productInfo.setProductStock(100);
-        productInfo.setProductDescription("很好吃的虾");
+        productInfo.setProductDescription("Good Beef");
         productInfo.setProductIcon("http://xxxx.jpg");
         productInfo.setProductStatus(ProductStatusEnum.DOWN.getCode());
         productInfo.setCategoryType(2);
@@ -63,13 +62,12 @@ public class ProductServiceImplTest {
         Assert.assertNotNull(result);
     }
 
-    //test上架
     @Test
     public void onSale() {
         ProductInfo result = productService.onSale("123456");
         Assert.assertEquals(ProductStatusEnum.UP, result.getProductStatusEnum());
     }
-    //
+
     @Test
     public void offSale() {
         ProductInfo result = productService.offSale("123456");

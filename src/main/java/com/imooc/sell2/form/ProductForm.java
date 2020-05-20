@@ -13,25 +13,10 @@ import java.math.BigDecimal;
 public class ProductForm {
 
     private String productId;
-
-    /**名字。*/
     private String productName;
-
-    /** price */
     private BigDecimal productPrice;
-
-    /** inventory*/
     private Integer productStock;
-
-    /** description*/
     private String productDescription;
-
-    /**小图*/
     private String productIcon;
-
-//    /**状态, 0正常 1下架*/
-//    private Integer productStatus;
-
-    /** 类目编号*/
     private Integer categoryType;
 }

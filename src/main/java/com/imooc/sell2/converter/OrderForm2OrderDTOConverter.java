@@ -27,16 +27,15 @@ public class OrderForm2OrderDTOConverter {
         orderDTO.setBuyerAddress(orderForm.getAddress());
         orderDTO.setBuyerOpenid(orderForm.getOpenid());
 
-        //把Gson转成list
+        //Convert Gson to list
         List<OrderDetail> orderDetailList = new ArrayList<>();
-        try{ //转换的过程中很有可能出错， 那我们就try catch 一下
+        try{
             orderDetailList = gson.fromJson(orderForm.getItems(),
                     new TypeToken<List<OrderDetail>>(){}.getType());
         } catch (Exception e) {
-            log.error("【对象转换】错误， string={}", orderForm.getItems());
+            log.error("【Object Convert】Error， string={}", orderForm.getItems());
             throw new SellException(ResultEnum.PARAM_ERROR);
         }
-
         orderDTO.setOrderDetailList(orderDetailList);
         return orderDTO;
     }

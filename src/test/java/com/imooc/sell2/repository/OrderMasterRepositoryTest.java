@@ -30,9 +30,9 @@ public class OrderMasterRepositoryTest {
     public void saveTest() {
         OrderMaster orderMaster = new OrderMaster();
         orderMaster.setOrderId("1234567");
-        orderMaster.setBuyerName("师兄");
+        orderMaster.setBuyerName("LF");
         orderMaster.setBuyerPhone("123456789123");
-        orderMaster.setBuyerAddress("慕课网");
+        orderMaster.setBuyerAddress("NYC");
         orderMaster.setBuyerOpenid(OPENID);
         orderMaster.setOrderAmount(new BigDecimal(2.5));
 

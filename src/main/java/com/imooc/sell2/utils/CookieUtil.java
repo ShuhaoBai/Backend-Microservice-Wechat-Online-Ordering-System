@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 创建Cookie的工具类
+ * Cookie creating utils
  * @author Shuhao Bai on 10/21/19
  */
 public class CookieUtil {
     /**
-     * 设置
+     * Config
      * @param response
      * @param name
      * @param value
@@ -38,7 +38,7 @@ public class CookieUtil {
     }
 
     /**
-     * 将cookie封装成Map
+     * Wrap cookies to map
      * @param request
      * @return
      */

@@ -20,7 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 卖家授权验证
+ * Seller Authentication
  *
  * @author Shuhao Bai on 10/24/19
  */
@@ -39,17 +39,17 @@ public class SellerAuthorizeAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
 
-        //查询cookie
+        //Search for Cookie
         Cookie cookie = CookieUtil.get(request, CookieConstant.TOKEN);
         if(cookie == null){
-            log.warn("【登录校验】 Cookie中查不到token");
+            log.warn("【Logging Authentication】 No cookie found in token");
             throw new SellerAuthorizeException();
         }
 
-        //去redis里查
+        //Search in Redis
         String tokenValue = redisTemplate.opsForValue().get(String.format(RedisConstant.TOKEN_PREFIX, cookie.getValue()));
         if(StringUtils.isEmpty(tokenValue)){
-            log.warn("【登录校验】Redis中查不到token");
+            log.warn("【Logging Authentication】No token found in Redis");
             throw new SellerAuthorizeException();
         }
     }

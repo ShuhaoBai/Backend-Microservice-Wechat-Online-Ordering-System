@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Seller End Product
+ * Seller Side Product
  * @author Shuhao Bai on 10/13/19
  */
 
@@ -40,7 +40,7 @@ public class SellerProductController {
     @Autowired
     private CategoryService categoryService;
     /**
-     * 列表
+     * List
      * @param page
      * @param size
      * @param map
@@ -59,7 +59,7 @@ public class SellerProductController {
     }
 
     /**
-     * 商品上架
+     * Put product on shelf
      * @param productId
      * @param map
      * @return
@@ -79,7 +79,7 @@ public class SellerProductController {
     }
 
     /**
-     * 商品下架
+     * Put product off shelf
      * @param productId
      * @param map
      * @return
@@ -105,14 +105,14 @@ public class SellerProductController {
             ProductInfo productInfo = productService.findOne(productId);
             map.put("productInfo", productInfo);
         }
-        //查询所有的类目
+        //Search for all products' categories
         List<ProductCategory> categoryList = categoryService.findAll();
         map.put("categoryList", categoryList);
         return new ModelAndView("product/index", map);
     }
 
     /**
-     * 保存/更新
+     * Save/Update
      * @param form
      * @param bindingResult
      * @param map
@@ -130,15 +130,13 @@ public class SellerProductController {
 
         ProductInfo productInfo = new ProductInfo();
         try {
-            //如果productId为空，说明是新增。
+            //If product id is null, it means the shelf is empty
             if (!StringUtils.isEmpty(form.getProductId())){
                 productInfo = productService.findOne(form.getProductId());
             } else {
                 form.setProductId(KeyUtil.genUniqueKey());
             }
-            //这个属性拷贝要格外小心，我们要先在数据库中把这个productInfo的form查出来，然后再把前端传过来的值赋给它，然后再存入数据库，这样才能覆盖（保存到）数据库
 
-            //ProductInfo productInfo = new ProductInfo();
             BeanUtils.copyProperties(form, productInfo);
             productService.save(productInfo);
         } catch (SellException e) {

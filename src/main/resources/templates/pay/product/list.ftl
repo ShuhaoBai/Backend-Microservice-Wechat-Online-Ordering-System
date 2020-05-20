@@ -40,7 +40,7 @@
                                     <td>${productInfo.updateTime}</td>
                                     <td><a href="sell2/seller/product/index?productId=${productInfo.productId}">修改</a></td>
                                     <td>
-                                        <#if productInfo.getProductStatusEnum().message == "在架">
+                                        <#if productInfo.getProductStatusEnum().message == "In Stock">
                                             <a href="sell2/seller/product/off_sale?productId=${productInfo.productId}">下架</a>
                                         <#else>
                                             <a href="sell2/seller/product/on_sale?productId=${productInfo.productId}">上架</a>

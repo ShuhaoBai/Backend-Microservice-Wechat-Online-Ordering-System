@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URLEncoder;
 
 /**
- * 用第三方SDK
+ * SDK
  * @author Shuhao Bai on 9/25/19
  */
 
@@ -39,8 +39,7 @@ public class WechatController {
 
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
-        //1.配置
-        //2.调用方法
+        //Configuration
         String url = projectUrlConfig.getWechatOpenAuthorize() + "/sell2/wechat/userInfo";
         String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
         return "redirect:" + redirectUrl;
@@ -53,7 +52,7 @@ public class WechatController {
         try{
             wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
         } catch (WxErrorException e){
-            log.error("【微信网页授权】{}", e);
+            log.error("【Wechat web page auth】{}", e);
             throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getError().getErrorMsg());
         }
         String openId = wxMpOAuth2AccessToken.getOpenId();
@@ -76,7 +75,7 @@ public class WechatController {
         try{
             wxMpOAuth2AccessToken = wxOpenService.oauth2getAccessToken(code);
         } catch (WxErrorException e){
-            log.error("【微信网页授权】{}", e);
+            log.error("【Wechat web auth】{}", e);
             throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getError().getErrorMsg());
         }
         log.info("wxMpOAuth2AccessToken={}", wxMpOAuth2AccessToken);

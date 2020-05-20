@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 /**
- * 微信公众号的Config
- * 用来配置第三方SDK：WxMpService
+ * Wechat MP Config
+ * Configuration of SDK: WxMpService
  *
  * @author Shuhao Bai on 9/25/19
  */

@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * @author Shuhao Bai on 1/11/20
- * 对product category的增删改查
+ * product category CRUD
  */
 public interface ProductCategoryMapper {
 
@@ -48,6 +48,4 @@ public interface ProductCategoryMapper {
 
     //put SQL syntax into XML file to implement SQL operations
     ProductCategory selectByCategoryType(Integer categoryType);
-
-
 }

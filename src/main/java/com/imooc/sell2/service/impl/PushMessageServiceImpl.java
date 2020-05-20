@@ -33,8 +33,8 @@ public class PushMessageServiceImpl implements PushMessageService {
         templateMessage.setToUser(orderDTO.getBuyerOpenid());
 
         List<WxMpTemplateData> data = Arrays.asList(
-                new WxMpTemplateData("first", "请记得收货"),
-                new WxMpTemplateData("keyword1", "微信点餐"),
+                new WxMpTemplateData("first", "Please receive the order."),
+                new WxMpTemplateData("keyword1", "Wechat food order"),
                 new WxMpTemplateData("keyword2", "18888888888"),
                 new WxMpTemplateData("keyword3", orderDTO.getOrderId()),
                 new WxMpTemplateData("keyword4", orderDTO.getorderStatusEnum().getMessage()),
@@ -45,13 +45,8 @@ public class PushMessageServiceImpl implements PushMessageService {
         templateMessage.setData(data);
         try{
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
-        } catch (WxErrorException e){ //这里catch掉错误就行，如果throw的话，会中断运行，如果客户下单，然后你推送一个消息给客户，但是推送消息这里出error了，结果你throw一个error出来，造成这一单下不了，影响赚钱
-            //这个推送消息的异常没有那么重要，catch之后记录一个log就行了，没必要抛异常中断程序运行
-            //No need to throw an error on pushing message, since it would interrupt the entire program
-            //If a customer placed an order, and there is an error occurred when you try to push the order confirmation message to the customer
-            //throwing an error would stop the entire program, thus, cancel customer's order
-            //Error in pushing message is not critical, we just need to catch and log it, that's all.
-            log.error("【微信模板消息】发送失败", e);
+        } catch (WxErrorException e){
+            log.error("【Wechat Tamplate Message】Message Send Failed", e);
         }
 
     }

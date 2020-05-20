@@ -2,11 +2,10 @@ package com.imooc.sell2.utils;
 
 /**
  * @author Shuhao Bai on 10/12/19
- * 用来校验支付金额的，如果遇到支付金额是0.1，然后系统金额是0.10，这种情况下金额其实是一致的，但是代码认为不一致
  */
 public class MathUtil {
     /**
-     * 比较2个金额是否相等
+     * check if two payment are matching
      * @param d1
      * @param d2
      * @return

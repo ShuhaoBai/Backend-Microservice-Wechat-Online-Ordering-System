@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 /**
- * 卖家端订单
+ * Seller Side Order
  *
  * @author Shuhao Bai on 10/12/19
  */
@@ -32,8 +32,8 @@ public class SellerOrderController {
 
     /**
      *
-     * @param page 第几页，从1页开始
-     * @param size 一页有多少条数据
+     * @param page
+     * @param size
      * @return
      */
     @GetMapping("/list")
@@ -50,7 +50,7 @@ public class SellerOrderController {
     }
 
     /**
-     * 取消订单
+     * Cancel Order
      * @param orderId
      * @return
      */
@@ -61,8 +61,8 @@ public class SellerOrderController {
             OrderDTO orderDTO = orderService.findOne(orderId);
             orderService.cancel(orderDTO);
         } catch (SellException e) {
-            log.error("【卖家端取消订单】发生异常{}", e);
-            //这里就不抛异常了，直接返回一个异常界面
+            log.error("【Seller Side Cancel Order】Error{}", e);
+            //return an error view
             map.put("msg", e.getMessage());
             map.put("url", "/sell2/seller/order/list");
             return new ModelAndView("common/error", map);
@@ -74,7 +74,7 @@ public class SellerOrderController {
     }
 
     /**
-     * 订单详情
+     * Order Detail
      * @param orderId
      * @param map
      * @return
@@ -86,8 +86,8 @@ public class SellerOrderController {
         try{
             orderService.findOne(orderId);
         } catch (SellException e) {
-            log.error("【卖家端查询订单详情】发生异常{}", e);
-            //这里就不抛异常了，直接返回一个异常界面
+            log.error("【Seller Side Search Order Detail】Error{}", e);
+            //return an error view
             map.put("msg", e.getMessage());
             map.put("url", "/sell2/seller/order/list");
             return new ModelAndView("common/error", map);
@@ -97,7 +97,7 @@ public class SellerOrderController {
     }
 
     /**
-     * 完结订单
+     * Order Complete
      * @param orderId
      * @param map
      * @return
@@ -109,8 +109,8 @@ public class SellerOrderController {
             OrderDTO orderDTO = orderService.findOne(orderId);
             orderService.finish(orderDTO);
         } catch (SellException e) {
-            log.error("【卖家端完结订单】发生异常{}", e);
-            //这里就不抛异常了，直接返回一个异常界面
+            log.error("【Seller Side Order Complete】Error{}", e);
+            //return an error view
             map.put("msg", e.getMessage());
             map.put("url", "/sell2/seller/order/list");
             return new ModelAndView("common/error", map);
